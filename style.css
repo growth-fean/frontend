@@ -1,0 +1,58 @@
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+}
+.hero-section {
+    background: url('hero-background.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+    background-blend-mode: overlay;
+    background-color: rgba(72, 72, 252, 0.5);
+}
+.video-container {
+    margin: 50px 0;
+}
+.sponsors-container {
+    overflow: hidden;
+    white-space: nowrap;
+}
+.sponsors-container img {
+    display: inline-block;
+    animation: scroll 10s linear infinite;
+}
+@keyframes scroll {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+.video-section {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    padding: 100px 0;
+    color: white;
+    width: 100%;
+}
+.how-it-works {
+    background-color: #f8f9fa;
+    padding: 3px;
+    margin: 40px;
+    border-radius: 1px;
+    text-align: center;
+}
+footer {
+    background-color: #1e3c72;
+    color: white;
+    padding: 20px 0;
+}
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 50px 0;
+    }
+    .video-container {
+        margin: 30px 0;
+    }
+}

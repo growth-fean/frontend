@@ -1,0 +1,220 @@
+@page "/"
+@using System.Collections
+
+@code {
+    public List<ServicesDTO> Services { get; set; } = new();
+
+    public class ServicesDTO
+    {
+        public bool IsActive { get; set; }
+        public Guid Id { get; set; }
+        public string IconUrl { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public List<string> Features { get; set; }
+        public string CtaText { get; set; }
+    }
+
+    protected override void OnInitialized()
+    {
+        Services = GetServices();
+        base.OnInitialized();
+    }
+
+    public static List<ServicesDTO> GetServices()
+    {
+        return new List<ServicesDTO>
+        {
+            new ServicesDTO
+            {
+                Id = Guid.NewGuid(),
+                IsActive = true,
+                IconUrl = "/icons/client-acquisition.svg",
+                Title = "Client Acquisition Systems",
+                Description = "Complete client acquisition infrastructure with 4 booking channels for predictable and consistent growth.",
+                Features = new List<string>
+                {
+                    "4 appointment booking channels setup",
+                    "2-5+ appointments per day guarantee",
+                    "System implementation and management",
+                    "90-day performance monitoring",
+                    "Lead generation metrics tracking"
+                },
+                CtaText = "Book Discovery Call"
+            },
+            new ServicesDTO
+            {
+                Id = Guid.NewGuid(),
+                IsActive = true,
+                IconUrl = "/icons/life-coaching.svg",
+                Title = "Life Coaching Program",
+                Description = "Transformative coaching program focused on achieving peace, contentment, and lifelong goals.",
+                Features = new List<string>
+                {
+                    "Personalized SMART goal setting",
+                    "Daily activity and emotion tracking",
+                    "Emergency consultation access",
+                    "Progress monitoring and achievement tracking",
+                    "Customized exercise and wellness plans"
+                },
+                CtaText = "Start Your Journey"
+            },
+            new ServicesDTO
+            {
+                Id = Guid.NewGuid(),
+                IsActive = true,
+                IconUrl = "/icons/agency-services.svg",
+                Title = "Lead Generation Agency",
+                Description = "Comprehensive lead generation and client management solutions for sustained business growth.",
+                Features = new List<string>
+                {
+                    "Performance metrics dashboard",
+                    "Campaign creation and management",
+                    "Contract management system",
+                    "ROI analysis and reporting",
+                    "Client database management"
+                },
+                CtaText = "Partner With Us"
+            }
+        };
+    }
+
+}
+
+@* HeroSection.razor *@
+
+<div class="hero-container bg-gradient-primary">
+    <div class="hero-content">
+        <div class="hero-text-wrapper">
+            <h1 class="hero-headline">
+                Unlock Your Full Potential
+                <span class="accent-text">with Expert Coaching</span>
+            </h1>
+            <p class="hero-subheadline">
+                Whether you're looking to enhance your singing, grow your business, or improve your life skills,
+                GrowthFean connects you with expert coaches who can guide you every step of the way.
+            </p>
+            <div class="hero-actions">
+                <button class="cta-primary">
+                    Find Your Perfect Coach
+                    <span class="oi oi-arrow-right"></span>
+                </button>
+                <button class="cta-secondary">
+                    Get Started
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="hero-arch"></div>
+</div>
+<div class="service-cards">
+    @foreach (var service in Services)
+    {
+        <div class="service-card @(service.IsActive ? "active" : "")">
+            <div class="card-content">
+                <div class="service-header">
+                    <span class="service-icon oi @service.IconUrl"></span>
+                    <h2 class="service-title">@service.Title</h2>
+                </div>
+                <p class="service-description">@service.Description</p>
+                <div class="service-features">
+                    @foreach (var feature in service.Features)
+                    {
+                        <div class="feature-item">
+                            <span class="oi oi-check feature-icon"></span>
+                            <span>@feature</span>
+                        </div>
+                    }
+                </div>
+                <button class="service-cta button-text">
+                    @service.CtaText
+                    <span class="oi oi-arrow-right"></span>
+                </button>
+            </div>
+        </div>
+    }
+</div>
+
+    <div class="video-section text-center mt-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4 text-white">
+                    <h2>Introduction Video</h2>
+                    <p><strong>Speaker:</strong> Hakeem</p>
+                    <p><strong>Topic:</strong> How to Achieve Your Goals</p>
+                </div>
+                <div class="col-md-8">
+                    <video class="img-fluid" controls>
+                        <source src="intro.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container text-center mt-5">
+        <h2>How GrowthFean Works</h2>
+        <div class="row">
+            <div class="col-md-3 how-it-works">
+                <h3>Choose Your Focus Area</h3>
+                <p>Browse coaches specializing in singing, life coaching, career development, and more.</p>
+            </div>
+            <div class="col-md-3 how-it-works">
+                <h3>Find Your Perfect Coach</h3>
+                <p>Use filters to choose a coach based on their experience, expertise, and availability.</p>
+            </div>
+            <div class="col-md-3 how-it-works">
+                <h3>Book Your Session</h3>
+                <p>Schedule a session at your convenience and get started on your personal growth journey.</p>
+            </div>
+           
+        </div>
+    </div>
+
+    <div class="container text-center mt-5">
+        <h2>Success Stories</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <blockquote class="blockquote">
+                    <p class="mb-0">"I worked with a vocal coach on GrowthFean, and my singing has improved drastically in just three months this was great"</p>
+                    <footer class="blockquote-footer">Sarah M., Aspiring Singer</footer>
+                </blockquote>
+            </div>
+            <div class="col-md-6">
+                <blockquote class="blockquote">
+                    <p class="mb-0">"With my life coach from GrowthFean, I've finally made the career change I’ve always dreamed of. It’s been life-changing!"</p>
+                    <footer class="blockquote-footer">John T., Career Growth Seeker</footer>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+
+    <div class="container text-center mt-5">
+        <h2>Our Sponsors</h2>
+        <div class="sponsors-container">
+            <img src="sponsor1.png" alt="Sponsor 1" class="img-fluid">
+            <img src="sponsor2.png" alt="Sponsor 2" class="img-fluid">
+            <img src="sponsor3.png" alt="Sponsor 3" class="img-fluid">
+            <img src="sponsor4.png" alt="Sponsor 4" class="img-fluid">
+        </div>
+    </div>
+
+<div class="container text-center mt-5">
+    <h2>Ready to unlock your full potential?</h2>
+    <a href="#" class="btn btn-primary">Find Your Perfect Coach</a>
+    <a href="#" class="btn btn-secondary">Get Started</a>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const hero = document.querySelector('.hero');
+        let colors = ['#6c63ff', '#3b3054', '#ff6584', '#ff3f61'];
+        let index = 0;
+
+        setInterval(() => {
+            hero.style.background = `linear-gradient(135deg, ${colors[index]}, ${colors[(index + 1) % colors.length]})`;
+            index = (index + 1) % colors.length;
+        }, 5000);
+    });
+</script>

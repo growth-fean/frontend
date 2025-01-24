@@ -1,4 +1,5 @@
 @page "/signup"
+@inject NavigationManager Navigation
 
 <h3 class="text-center mt-5">Sign Up</h3>
 <div class="container mt-5">
@@ -6,27 +7,49 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <form>
+                    <EditForm Model="@user" OnValidSubmit="HandleValidSubmit">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
                         <div class="form-group">
                             <label for="firstName">First Name</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="Enter your first name" />
+                            <InputText class="form-control" id="firstName" @bind-Value="user.FirstName" placeholder="Enter your first name" />
                         </div>
                         <div class="form-group">
                             <label for="lastName">Last Name</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="Enter your last name" />
+                            <InputText class="form-control" id="lastName" @bind-Value="user.LastName" placeholder="Enter your last name" />
                         </div>
                         <div class="form-group">
                             <label for="email">Email address</label>
-                            <input type="email" class="form-control" id="email" placeholder="Enter your email" />
+                            <InputText type="email" class="form-control" id="email" @bind-Value="user.Email" placeholder="Enter your email" />
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Enter your password" />
+                            <InputText type="password" class="form-control" id="password" @bind-Value="user.Password" placeholder="Enter your password" />
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
-                    </form>
+                    </EditForm>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@code {
+    private UserModel user = new UserModel();
+
+    private void HandleValidSubmit()
+    {
+        // Handle user registration logic here
+
+        // Redirect to the main page
+        Navigation.NavigateTo("/main");
+    }
+
+    public class UserModel
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+}
